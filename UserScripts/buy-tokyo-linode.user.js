@@ -3,7 +3,7 @@
 // @namespace      Buy Tokyo Linode
 // @description    Buy Tokyo Linode
 // @match          https://manager.linode.com/linodes/add*
-// @version        0.2
+// @version        0.3
 // @grant          none
 // @copyright      don-johnny
 // @updateURL      https://don-johnny.github.io/UserScripts/UserScripts/buy-tokyo-linode.user.js
@@ -54,4 +54,5 @@ function buyTokyoNode() {
   catch (e) {
   }
 }
+//auto reload page to seek tokyo node.
 buyTokyoNode();
