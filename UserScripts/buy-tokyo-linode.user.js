@@ -54,5 +54,5 @@ function buyTokyoNode() {
   catch (e) {
   }
 }
-//auto reload page to seek tokyo node.
+//auto reload page to seek tokyo nodes.
 buyTokyoNode();
