@@ -6,8 +6,8 @@
 // @version        0.2
 // @grant          none
 // @copyright      don-johnny
-// @updateURL      https://don-johnny.github.io/UserScripts/buy-linode-tokyo.user.js
-// @downloadURL    https://don-johnny.github.io/UserScripts/buy-linode-tokyo.user.js
+// @updateURL      https://don-johnny.github.io/UserScripts/UserScripts/buy-linode-tokyo.user.js
+// @downloadURL    https://don-johnny.github.io/UserScripts/UserScripts/buy-linode-tokyo.user.js
 // ==/UserScript==
 // thanks to https://github.com/ytzong/UserScripts
 function isContain(ojbCollection, objValue) {
