@@ -2,4 +2,4 @@
 ==UserScripts==
 
 
->>cd UserScripts
+> cd UserScripts
