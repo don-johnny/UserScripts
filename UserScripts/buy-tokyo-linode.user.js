@@ -24,7 +24,7 @@ function refreshJ()
 {
   window.location.reload();
 }
-function doNothing{}
+function doNothing(){}
 function buyTokyoNode() {
   try {
     //1G Linode Plan
