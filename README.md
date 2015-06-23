@@ -1,5 +1,2 @@
 # UserScripts
-==UserScripts==
-
-
-$ cd UserScripts
+== UserScripts ==
