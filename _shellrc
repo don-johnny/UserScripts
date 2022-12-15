@@ -1,6 +1,6 @@
 
 # shellcheck disable=SC1091
-source "/usr/local/etc/shellprofile"
+source "$HOME/.profile"
 
 export CLICOLOR=1
 
