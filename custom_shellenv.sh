@@ -8,9 +8,7 @@ fi
 
 curl -sSfLo "$HOME/.tmux.conf" "https://tinkernels.github.io/userscripts/_tmux.conf"
 
-if [ -d "$HOME/.oh-my-zsh" ];then
-    omz update
-else
+if [ ! -d "$HOME/.oh-my-zsh" ];then
     curl -sSfL "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh" | bash -s
 fi
 
