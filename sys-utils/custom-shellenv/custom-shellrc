@@ -25,9 +25,10 @@ function pyenvr {
     )
 }
 
-function envupdate {
+function envupdate_ {
     command -v env-update >/dev/null && env-update
 	source /etc/profile
+    [ -n "$ZSH_NAME" ] && source "$HOME/.zshrc"
 	rehash
 }
 
