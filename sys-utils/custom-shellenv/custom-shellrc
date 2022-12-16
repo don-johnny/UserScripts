@@ -3,6 +3,7 @@
 source "$HOME/.profile"
 
 export CLICOLOR=1
+export SYSTEMD_EDITOR="vim"
 
 function update_nvm {
     (
@@ -26,6 +27,7 @@ function pyenvr {
 }
 
 function envupdate_ {
+    unset TK_PROFILE_LOADED
     command -v env-update >/dev/null && env-update
 	source /etc/profile
     [ -n "$ZSH_NAME" ] && source "$HOME/.zshrc"
