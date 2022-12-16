@@ -27,11 +27,6 @@ done
 # done
 # unset sh
 
-if [ -d /etc/profile.d ]; then
-    CUSTOM_PROFILE_SHF=/etc/profile.d/99-tk.sh
-    [ -r "$CUSTOM_PROFILE_SHF" ] || curl -sSfLo "$CUSTOM_PROFILE_SHF" "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/sys-utils/custom-shellenv/profile-d-tk.sh"
-fi
-
 # .zshrc
 grep -qE '^[[:blank:]]*ZSH_THEME="smt"' "$HOME/.zshrc"  || sed -i -r 's:^[[:blank:]]*ZSH_THEME=.*$:ZSH_THEME="smt":g' "$HOME/.zshrc"
 

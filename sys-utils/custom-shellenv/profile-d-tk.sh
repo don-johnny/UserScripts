@@ -1,2 +1,0 @@
-
-unset TK_PROFILE_LOADED
