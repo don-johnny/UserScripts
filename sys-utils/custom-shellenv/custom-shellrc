@@ -27,11 +27,13 @@ function pyenvr {
 }
 
 function envupdate_ {
-    unset TK_PROFILE_LOADED
     command -v env-update >/dev/null && env-update
+    unset TK_PROFILE_LOADED
 	source /etc/profile
-    [ -n "$ZSH_NAME" ] && source "$HOME/.zshrc"
-    [ -n "$BASH" ] && source "$HOME/.bashrc"
+    if [[ "$OSTYPE" != "darwin"* ]]; then 
+        [ -n "$ZSH_NAME" ] && source "$HOME/.zshrc"
+        [ -n "$BASH" ] && source "$HOME/.bashrc"
+    fi
 	rehash
 }
 

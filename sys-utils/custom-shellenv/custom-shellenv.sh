@@ -31,7 +31,7 @@ done
 grep -qE '^[[:blank:]]*ZSH_THEME="smt"' "$HOME/.zshrc"  || sed -i -r 's:^[[:blank:]]*ZSH_THEME=.*$:ZSH_THEME="smt":g' "$HOME/.zshrc"
 
 # base64 encoded:
-# PROMPT='%{$fg[blue]%}<-%{$fg_bold[blue]%} %! $(prompt_char) ${return_status} $(git_time_since_commit)$(git_prompt_status)%{$reset_color%}
+# PROMPT='%{$fg[blue]%}<-%{$fg_bold[blue]%} %! $(prompt_char) $(git_time_since_commit)$(git_prompt_status) ${return_status}%{$reset_color%}
 # %{$fg_bold[green]%}%n@%m %{$fg[blue]%}%D{[%H:%M:%S]} %{$reset_color%}%{$fg[white]%}[%~]%{$reset_color%}$(git_prompt_short_sha)$(git_prompt_info)
 # %{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} '
 grep -qE '^[[:blank:]]*PROMPT=' "$HOME/.zshrc" ||  echo "UFJPTVBUPScleyRmZ1tibHVlXSV9PC0leyRmZ19ib2xkW2JsdWVdJX0gJSEgJChwcm9tcHRfY2hhcikgJHtyZXR1cm5fc3RhdHVzfSAkKGdpdF90aW1lX3NpbmNlX2NvbW1pdCkkKGdpdF9wcm9tcHRfc3RhdHVzKSV7JHJlc2V0X2NvbG9yJX0KJXskZmdfYm9sZFtncmVlbl0lfSVuQCVtICV7JGZnW2JsdWVdJX0lRHtbJUg6JU06JVNdfSAleyRyZXNldF9jb2xvciV9JXskZmdbd2hpdGVdJX1bJX5dJXskcmVzZXRfY29sb3IlfSQoZ2l0X3Byb21wdF9zaG9ydF9zaGEpJChnaXRfcHJvbXB0X2luZm8pCiV7JGZnW2JsdWVdJX0tPiV7JGZnX2JvbGRbYmx1ZV0lfSAlIyV7JHJlc2V0X2NvbG9yJX0gJwo=" \
