@@ -34,7 +34,7 @@ function envupdate_ {
         [ -n "$ZSH_NAME" ] && source "$HOME/.zshrc"
         [ -n "$BASH" ] && source "$HOME/.bashrc"
     fi
-	rehash
+    command -v rehash >/dev/null && rehash
 }
 
 alias rt='tput reset'
