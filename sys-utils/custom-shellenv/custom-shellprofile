@@ -1,6 +1,7 @@
+#!/usr/bin/env bash
 
 # shellcheck disable=SC1091
-if [ -n "$TK_PROFILE_LOADED" ] ; then
+if [ -n "$TK_PROFILE_LOADED" ]; then
     true
 else
     # nvm
@@ -11,9 +12,9 @@ else
 
     # rbenv
     command -v rbenv >/dev/null && eval "$(rbenv init -)"
-    
+
     # pyenv
-    export PYENV_ROOT="$HOME/.pyenv" 
+    export PYENV_ROOT="$HOME/.pyenv"
     command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
     export PIPENV_VENV_IN_PROJECT=1
     export POETRY_VIRTUALENVS_IN_PROJECT=1
