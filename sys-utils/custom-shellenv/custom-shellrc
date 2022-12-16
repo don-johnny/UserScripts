@@ -38,3 +38,5 @@ function envupdate_ {
 
 alias rt='tput reset'
 alias aria2c_='aria2c --no-conf --file-allocation=none -x 16 -c'
+
+[ -r "$HOME/.custom-shellrc" ]  && source "$HOME/.custom-shellrc"

@@ -21,6 +21,8 @@ else
 
     export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOME/go/bin:/usr/local/sbin:$PATH"
 
+    [ -r "$HOME/.custom-shellprofile" ]  && source "$HOME/.custom-shellprofile"
+
     # Flag shell profile is loaded.
     export TK_PROFILE_LOADED=1
 fi
