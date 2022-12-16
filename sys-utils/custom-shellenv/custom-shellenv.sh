@@ -33,7 +33,7 @@ grep -qE '^[[:blank:]]*ZSH_THEME="smt"' "$HOME/.zshrc" || sed -i -r 's:^[[:blank
 # PROMPT='%{$fg[blue]%}<-%{$fg_bold[blue]%} %! $(prompt_char) $(git_time_since_commit)$(git_prompt_status) ${return_status}%{$reset_color%}
 # %{$fg_bold[green]%}%n@%m %{$fg[blue]%}%D{[%H:%M:%S]} %{$reset_color%}%{$fg[white]%}[%~]%{$reset_color%}$(git_prompt_short_sha)$(git_prompt_info)
 # %{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} '
-grep -qE '^[[:blank:]]*PROMPT=' "$HOME/.zshrc" || echo "UFJPTVBUPScleyRmZ1tibHVlXSV9PC0leyRmZ19ib2xkW2JsdWVdJX0gJSEgJChwcm9tcHRfY2hhcikgJHtyZXR1cm5fc3RhdHVzfSAkKGdpdF90aW1lX3NpbmNlX2NvbW1pdCkkKGdpdF9wcm9tcHRfc3RhdHVzKSV7JHJlc2V0X2NvbG9yJX0KJXskZmdfYm9sZFtncmVlbl0lfSVuQCVtICV7JGZnW2JsdWVdJX0lRHtbJUg6JU06JVNdfSAleyRyZXNldF9jb2xvciV9JXskZmdbd2hpdGVdJX1bJX5dJXskcmVzZXRfY29sb3IlfSQoZ2l0X3Byb21wdF9zaG9ydF9zaGEpJChnaXRfcHJvbXB0X2luZm8pCiV7JGZnW2JsdWVdJX0tPiV7JGZnX2JvbGRbYmx1ZV0lfSAlIyV7JHJlc2V0X2NvbG9yJX0gJwo=" |
+grep -qE '^[[:blank:]]*PROMPT=' "$HOME/.zshrc" || echo "UFJPTVBUPScleyRmZ1tibHVlXSV9PC0leyRmZ19ib2xkW2JsdWVdJX0gJSEgJChwcm9tcHRfY2hhcikgJChnaXRfdGltZV9zaW5jZV9jb21taXQpJChnaXRfcHJvbXB0X3N0YXR1cykgJHtyZXR1cm5fc3RhdHVzfSV7JHJlc2V0X2NvbG9yJX0KJXskZmdfYm9sZFtncmVlbl0lfSVuQCVtICV7JGZnW2JsdWVdJX0lRHtbJUg6JU06JVNdfSAleyRyZXNldF9jb2xvciV9JXskZmdbd2hpdGVdJX1bJX5dJXskcmVzZXRfY29sb3IlfSQoZ2l0X3Byb21wdF9zaG9ydF9zaGEpJChnaXRfcHJvbXB0X2luZm8pCiV7JGZnW2JsdWVdJX0tPiV7JGZnX2JvbGRbYmx1ZV0lfSAlIyV7JHJlc2V0X2NvbG9yJX0gJwo=" |
     base64 -d >>"$HOME/.zshrc"
 
 grep -qE '^[[:blank:]]*RPROMPT=' "$HOME/.zshrc" || echo 'RPROMPT=""' >>"$HOME/.zshrc"
