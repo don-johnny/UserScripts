@@ -33,6 +33,7 @@ function pyenvr {
 }
 
 function envupdate_ {
+    unset TK_PROFILE_LOADED
     command -v env-update >/dev/null && env-update
     source /etc/profile
     # [[ "$OSTYPE" != "darwin"* ]] && echo macos
