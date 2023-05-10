@@ -20,12 +20,6 @@ for F in "$HOME/.zshrc" "$HOME/.bashrc"; do
     grep -q "source \$HOME/.shellrc" "$F" || echo "source \$HOME/.shellrc" >>"$F"
 done
 
-# /etc/profile snippet
-# for sh in /etc/profile.d/*.sh ; do
-# 	[ -r "$sh" ] && . "$sh"
-# done
-# unset sh
-
 # .zshrc
 grep -qE '^[[:blank:]]*ZSH_THEME="smt"' "$HOME/.zshrc" || sed -i -r 's:^[[:blank:]]*ZSH_THEME=.*$:ZSH_THEME="smt":g' "$HOME/.zshrc"
 
