@@ -8,9 +8,6 @@
 
 source "$HOME/.profile"
 
-export CLICOLOR=1
-export SYSTEMD_EDITOR="vim"
-
 function update_nvm {
     (
         cd "$NVM_DIR" || exit
@@ -30,6 +27,14 @@ function pyenvr {
             pyenv exec "$@"
         fi
     )
+}
+
+function rdnstr_ {
+    if [ -z "$1" ]; then
+        LC_ALL=C tr -dc '[:alnum:]' < /dev/urandom
+    else
+        LC_ALL=C tr -dc '[:alnum:]' < /dev/urandom | fold -w "$1" | head -n 1
+    fi
 }
 
 function envupdate_ {
