@@ -41,9 +41,31 @@ function rdnstr_ {
     fi
 }
 
+function hash_pwd_ {
+    (
+        if (( $# < 2 )); then
+            echo "usage: hash_pwd_ OPENSSL_PASSWD_PARAMS PASSWD"
+            echo
+            echo "openssl passwd help:"
+            echo
+            openssl passwd -help 2>&1 | sed  -E 's/^(.*)$/    \1/g'
+        else
+            ARGS_=( "$@" )
+            ARGS_4OPENSSL_=(); i=1
+            ARG_PWD_=""
+            # copy args to new array except last arg
+            for v in "${ARGS_[@]}"; do if ((i + 1 > ${#ARGS_[@]})); then ARG_PWD_="$v"; break; else ARGS_4OPENSSL_+=("$v"); i=$((i+1)); fi; done
+            if [ -n "$ARG_PWD_" ];then
+                echo "$ARG_PWD_" | openssl passwd "${ARGS_4OPENSSL_[@]}" -stdin
+            fi
+            
+        fi
+    )
+}
+
 function envupdate_ {
     unset TK_PROFILE_LOADED
-    command -v env-update >/dev/null && env-update
+    [ "$USER" = "root" ] && command -v env-update >/dev/null && env-update
     source /etc/profile
     # [[ "$OSTYPE" != "darwin"* ]] && echo macos
     [ -n "$ZSH_NAME" ] && source "$HOME/.zshrc"
