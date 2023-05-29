@@ -8,7 +8,7 @@
 
 source "$HOME/.profile"
 
-function update_nvm {
+function update_nvm_ {
     (
         cd "$NVM_DIR" || exit
         git fetch --tags origin
@@ -16,7 +16,11 @@ function update_nvm {
     )
 }
 
-function pyenvr {
+function update_env_scripts_ {
+    curl -sSfL "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/sys-utils/custom-shellenv/custom-shellenv.sh" | bash -s
+}
+
+function pyenvr_ {
     (
         eval "$(pyenv init -)"
         IS_FIRST_ARG_V=1
