@@ -8,7 +8,10 @@
 
 source "$HOME/.profile"
 
-function update_nvm_ {
+alias rt='tput reset'
+alias aria2c-='aria2c --no-conf --file-allocation=none -x 16 -c'
+
+function update-nvm- {
     (
         cd "$NVM_DIR" || exit
         git fetch --tags origin
@@ -16,11 +19,11 @@ function update_nvm_ {
     )
 }
 
-function update_env_scripts_ {
+function update-env-scripts- {
     curl -sSfL "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/sys-utils/custom-shellenv/custom-shellenv.sh" | bash -s
 }
 
-function pyenvr_ {
+function pyenvr- {
     (
         eval "$(pyenv init -)"
         IS_FIRST_ARG_V=1
@@ -33,7 +36,7 @@ function pyenvr_ {
     )
 }
 
-function rdnstr_ {
+function rdnstr- {
     if [ -z "$1" ]; then
         LC_ALL=C tr -dc '[:alnum:]' < /dev/urandom
     else
@@ -41,7 +44,7 @@ function rdnstr_ {
     fi
 }
 
-function hash_pwd_ {
+function hash-pwd- {
     (
         if (( $# < 2 )); then
             echo "usage: hash_pwd_ OPENSSL_PASSWD_PARAMS PASSWD"
@@ -63,7 +66,7 @@ function hash_pwd_ {
     )
 }
 
-function envupdate_ {
+function envupdate- {
     unset TK_PROFILE_LOADED
     [ "$USER" = "root" ] && command -v env-update >/dev/null && env-update
     source /etc/profile
@@ -72,8 +75,5 @@ function envupdate_ {
     [ -n "$BASH" ] && source "$HOME/.bashrc"
     command -v rehash >/dev/null && rehash
 }
-
-alias rt='tput reset'
-alias aria2c_='aria2c --no-conf --file-allocation=none -x 16 -c'
 
 [ -r "$HOME/.custom-shellrc" ]  && source "$HOME/.custom-shellrc"
