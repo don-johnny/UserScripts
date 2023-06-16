@@ -20,6 +20,9 @@ curl -sSfL -o bbr-patch/bbrpatch-12-ni_tcp_bbrplus_c.patch              "https:/
 curl -sSfL -o bbr-patch/bbrpatch-13-ni_Kconfig.patch                    "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/bbrpatch-13-ni_Kconfig.patch"
 curl -sSfL -o bbr-patch/bbrpatch-14-ni_Makefile.patch                   "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/bbrpatch-14-ni_Makefile.patch"
 
+# bbrplus file
+cp -v net/ipv4/tcp_bbr{,plus}.c
+
 # bbr2 sources files
 curl -sSfL -o net/ipv4/tcp_bbr2.c   "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/tcp_bbr2.c"
 curl -sSfL -o net/ipv4/tcp_plb.c    "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/tcp_plb.c"
