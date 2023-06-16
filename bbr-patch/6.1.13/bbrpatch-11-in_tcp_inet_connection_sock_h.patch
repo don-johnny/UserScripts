@@ -1,0 +1,13 @@
+diff --git a/include/net/inet_connection_sock.h.orig b/include/net/inet_connection_sock.h
+index c2b15f7..1ecebf9 100644
+--- a/include/net/inet_connection_sock.h.orig
++++ b/include/net/inet_connection_sock.h
+@@ -135,7 +135,7 @@ struct inet_connection_sock {
+ 	u32			  icsk_probes_tstamp;
+ 	u32			  icsk_user_timeout;
+ 
+-	u64			  icsk_ca_priv[104 / sizeof(u64)];
++	u64			  icsk_ca_priv[224 / sizeof(u64)];
+ #define ICSK_CA_PRIV_SIZE	  sizeof_field(struct inet_connection_sock, icsk_ca_priv)
+ };
+ 
