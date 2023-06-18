@@ -8,7 +8,7 @@ index 2dfb122..0efd274 100644
  
 +config TCP_CONG_BBRPLUS
 +	bool "BBRPLUS TCP"
-+	default n
++	default y
 +	help
 +
 +	  BBRplus is an enhanced version of BBR (Bottleneck Bandwidth and RTT).
@@ -17,7 +17,7 @@ index 2dfb122..0efd274 100644
 +
 +config TCP_CONG_BBR2
 +	bool "BBR2 TCP"
-+	default n
++	default y
 +	help
 +
 +	  BBR2 TCP congestion control is a model-based congestion control
