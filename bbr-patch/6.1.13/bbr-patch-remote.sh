@@ -36,4 +36,4 @@ curl -SfL -o net/ipv4/tcp_plb.c    "https://raw.githubusercontent.com/tinkernels
 
 chmod a+x bbr-patch/bbr-patch-local.sh
 
-bbr-patch/bbr-patch-local.sh -p1 --verbose
+sh -c 'bbr-patch/bbr-patch-local.sh -p1 --verbose'
