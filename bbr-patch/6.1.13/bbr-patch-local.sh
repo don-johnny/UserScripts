@@ -2,9 +2,6 @@
 
 set -e
 
-COMFIRM_="no"; echo -n "Are you sure to apply patch? (yes/[no]):"
-read -r COMFIRM_ ; [[ $COMFIRM_ == "yes" ]] || exit 1
-
 patch "$@" -i   bbr-patch/bbrpatch-01-include-linux-tcp.h.patch
 patch "$@" -i   bbr-patch/bbrpatch-02-include-net-inet_connection_sock.h.patc
 patch "$@" -i   bbr-patch/bbrpatch-03-include-net-netns-ipv4.h.patch

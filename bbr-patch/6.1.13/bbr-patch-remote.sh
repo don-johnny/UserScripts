@@ -36,4 +36,7 @@ curl -SfL -o net/ipv4/tcp_plb.c    "https://raw.githubusercontent.com/tinkernels
 
 chmod a+x bbr-patch/bbr-patch-local.sh
 
-sh -c 'bbr-patch/bbr-patch-local.sh -p1 --verbose'
+COMFIRM_="no"; echo -n "Are you sure to apply patch? (yes/[no]):"
+read -r COMFIRM_ </dev/tty; [[ $COMFIRM_ == "yes" ]] || exit 1
+
+bbr-patch/bbr-patch-local.sh -p1 --verbose
