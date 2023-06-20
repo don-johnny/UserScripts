@@ -4,6 +4,8 @@ mkdir -p bbr-patch
 
 curl -SfL -o bbr-patch/bbr-patch-local.sh "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/bbr-patch-local.sh"
 
+set -x
+
 # patch files
 curl -SfL -o bbr-patch/bbrpatch-01-include-linux-tcp.h.patch                    "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/bbrpatch-01-include-linux-tcp.h.patch"
 curl -SfL -o bbr-patch/bbrpatch-02-include-net-inet_connection_sock.h.patc      "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/bbrpatch-02-include-net-inet_connection_sock.h.patc"
