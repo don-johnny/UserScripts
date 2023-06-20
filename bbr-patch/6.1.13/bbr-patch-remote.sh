@@ -8,7 +8,7 @@ curl -SfL -o bbr-patch/bbr-patch-local.sh "https://raw.githubusercontent.com/tin
 
 # patch files
 curl -SfL -o bbr-patch/bbrpatch-01-include-linux-tcp.h.patch                    "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/bbrpatch-01-include-linux-tcp.h.patch"
-curl -SfL -o bbr-patch/bbrpatch-02-include-net-inet_connection_sock.h.patc      "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/bbrpatch-02-include-net-inet_connection_sock.h.patc"
+curl -SfL -o bbr-patch/bbrpatch-02-include-net-inet_connection_sock.h.patch     "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/bbrpatch-02-include-net-inet_connection_sock.h.patc"
 curl -SfL -o bbr-patch/bbrpatch-03-include-net-netns-ipv4.h.patch               "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/bbrpatch-03-include-net-netns-ipv4.h.patch"
 curl -SfL -o bbr-patch/bbrpatch-04-include-net-tcp.h.patch                      "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/bbrpatch-04-include-net-tcp.h.patch"
 curl -SfL -o bbr-patch/bbrpatch-05-include-uapi-linux-inet_diag.h.patch         "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/bbr-patch/6.1.13/bbrpatch-05-include-uapi-linux-inet_diag.h.patch"
