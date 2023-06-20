@@ -3,7 +3,7 @@
 set -e
 
 patch "$@" -i   bbr-patch/bbrpatch-01-include-linux-tcp.h.patch
-patch "$@" -i   bbr-patch/bbrpatch-02-include-net-inet_connection_sock.h.patc
+patch "$@" -i   bbr-patch/bbrpatch-02-include-net-inet_connection_sock.h.patch
 patch "$@" -i   bbr-patch/bbrpatch-03-include-net-netns-ipv4.h.patch
 patch "$@" -i   bbr-patch/bbrpatch-04-include-net-tcp.h.patch
 patch "$@" -i   bbr-patch/bbrpatch-05-include-uapi-linux-inet_diag.h.patch
