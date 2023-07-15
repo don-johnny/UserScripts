@@ -15,16 +15,16 @@ command -v rbenv >/dev/null && eval "$(rbenv init -)"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-PATH_4_TK_PROFILE_TMP="$PYENV_ROOT/bin" ; case ":$PATH:" in *":$PATH_4_TK_PROFILE_TMP:"*) ;; *) export PATH="$PATH_4_TK_PROFILE_TMP:$PATH" ;; esac; unset PATH_4_TK_PROFILE_TMP
+PATH2INS_TMP="$PYENV_ROOT/bin" ; case ":$PATH:" in *":$PATH2INS_TMP:"*) ;; *) export PATH="$PATH2INS_TMP:$PATH" ;; esac; unset PATH2INS_TMP
 command -v pyenv >/dev/null && eval "$(pyenv init -)"
 
 export PIPENV_VENV_IN_PROJECT=1
 export POETRY_VIRTUALENVS_IN_PROJECT=1
 
-PATH_4_TK_PROFILE_TMP="$HOME/.cargo/bin" ; case ":$PATH:" in *":$PATH_4_TK_PROFILE_TMP:"*) ;; *) export PATH="$PATH_4_TK_PROFILE_TMP:$PATH" ;; esac; unset PATH_4_TK_PROFILE_TMP
-PATH_4_TK_PROFILE_TMP="$HOME/.local/bin" ; case ":$PATH:" in *":$PATH_4_TK_PROFILE_TMP:"*) ;; *) export PATH="$PATH_4_TK_PROFILE_TMP:$PATH" ;; esac; unset PATH_4_TK_PROFILE_TMP
-PATH_4_TK_PROFILE_TMP="$HOME/go/bin" ; case ":$PATH:" in *":$PATH_4_TK_PROFILE_TMP:"*) ;; *) export PATH="$PATH_4_TK_PROFILE_TMP:$PATH" ;; esac; unset PATH_4_TK_PROFILE_TMP
-PATH_4_TK_PROFILE_TMP="/usr/local/sbin" ; case ":$PATH:" in *":$PATH_4_TK_PROFILE_TMP:"*) ;; *) export PATH="$PATH_4_TK_PROFILE_TMP:$PATH" ;; esac; unset PATH_4_TK_PROFILE_TMP
+PATH2INS_TMP="$HOME/.cargo/bin" ; case ":$PATH:" in *":$PATH2INS_TMP:"*) ;; *) export PATH="$PATH2INS_TMP:$PATH" ;; esac; unset PATH2INS_TMP
+PATH2INS_TMP="$HOME/.local/bin" ; case ":$PATH:" in *":$PATH2INS_TMP:"*) ;; *) export PATH="$PATH2INS_TMP:$PATH" ;; esac; unset PATH2INS_TMP
+PATH2INS_TMP="$HOME/go/bin" ; case ":$PATH:" in *":$PATH2INS_TMP:"*) ;; *) export PATH="$PATH2INS_TMP:$PATH" ;; esac; unset PATH2INS_TMP
+PATH2INS_TMP="/usr/local/sbin" ; case ":$PATH:" in *":$PATH2INS_TMP:"*) ;; *) export PATH="$PATH2INS_TMP:$PATH" ;; esac; unset PATH2INS_TMP
 
 [ -r "$HOME/.custom-shellprofile" ]  && source "$HOME/.custom-shellprofile"
 
