@@ -31,6 +31,8 @@ PATH2INS_TMP="/usr/local/sbin" ; case ":$PATH:" in *":$PATH2INS_TMP:"*) ;; *) ex
 export CLICOLOR=1
 export SYSTEMD_EDITOR="vim"
 
+export NODE_REPL_HISTORY=''
+
 # Flag shell profile is loaded.
 export TK_PROFILE_LOADED=1
 
