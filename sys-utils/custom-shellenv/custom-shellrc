@@ -76,4 +76,10 @@ function envupdate- {
     command -v rehash >/dev/null && rehash
 }
 
+if [ -n "$BASH" ];then
+  if [ -f /etc/bashrc ]; then
+      . /etc/bashrc
+  fi
+fi
+
 [ -r "$HOME/.custom-shellrc" ]  && source "$HOME/.custom-shellrc"
