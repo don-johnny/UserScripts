@@ -76,6 +76,22 @@ function envupdate- {
     command -v rehash >/dev/null && rehash
 }
 
+function scra() {
+    screen -xUS "$(screen -ls | tail -n +2 | head -n -1 | awk '{print $1}' | grep ".$1")"
+}
+
+function scrl() {
+    screen -ls
+}
+
+function scrn() {
+    screen -h 10000 -US "$1"
+}
+
+function scrk() {
+    screen -XS "$(screen -ls | tail -n +2 | head -n -1 | awk '{print $1}' | grep ".$1")" quit
+}
+
 if [ -n "$BASH" ];then
   if [ -f /etc/bashrc ]; then
       . /etc/bashrc
