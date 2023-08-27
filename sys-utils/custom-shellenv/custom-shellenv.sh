@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
-if [ -d "$HOME/.tmux/plugins/tpm" ]; then
-    (cd "$HOME/.tmux/plugins/tpm" && git pull)
-else
-    git clone --depth 1 "https://github.com/tmux-plugins/tpm.git" "$HOME/.tmux/plugins/tpm"
-fi
-
+# tmux conf
 curl -sSfLo "$HOME/.tmux.conf" "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/sys-utils/custom-shellenv/custom-tmux.conf"
+
+# screen conf
+if [ ! -r "$HOME/.screenrc" ];then
+    echo "escape ^Bb" > "$HOME/.screenrc"
+else
+    grep -Eq '^[[:blank:]]*escape \^Bb' "$HOME/.screenrc" || echo "escape ^Bb" >> "$HOME/.screenrc"
+fi
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     curl -sSfL "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh" | bash -s
