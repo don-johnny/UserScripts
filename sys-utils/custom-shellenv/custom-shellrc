@@ -77,7 +77,7 @@ function envupdate- {
 }
 
 function scra() {
-    screen -xUS "$(screen -ls | tail -n +2 | head -n -1 | awk '{print $1}' | grep ".$1")"
+    screen -xUS "$(screen -ls | tail +2 | head -1 | awk '{print $1}' | grep ".$1")"
 }
 
 function scrl() {
@@ -89,7 +89,7 @@ function scrn() {
 }
 
 function scrk() {
-    screen -XS "$(screen -ls | tail -n +2 | head -n -1 | awk '{print $1}' | grep ".$1")" quit
+    screen -XS "$(screen -ls | tail +2 | head -1 | awk '{print $1}' | grep ".$1")" quit
 }
 
 if [ -n "$BASH" ];then
