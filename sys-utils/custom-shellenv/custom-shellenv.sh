@@ -6,8 +6,10 @@ curl -sSfLo "$HOME/.tmux.conf" "https://raw.githubusercontent.com/tinkernels/use
 # screen conf
 if [ ! -r "$HOME/.screenrc" ];then
     echo "escape ^Bb" > "$HOME/.screenrc"
+    echo "termcapinfo xterm* ti@:te@" >> "$HOME/.screenrc"
 else
-    grep -Eq '^[[:blank:]]*escape \^Bb' "$HOME/.screenrc" || echo "escape ^Bb" >> "$HOME/.screenrc"
+    grep -Eq '^[[:blank:]]*escape[[:blank:]]+\^Bb' "$HOME/.screenrc" || echo "escape ^Bb" >> "$HOME/.screenrc"
+    grep -Eq '^[[:blank:]]*termcapinfo[[:blank:]]+xterm\*[[:blank:]]+ti@:te@' "$HOME/.screenrc" || echo "termcapinfo xterm* ti@:te@" >> "$HOME/.screenrc"
 fi
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
