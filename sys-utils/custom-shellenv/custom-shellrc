@@ -76,20 +76,23 @@ function envupdate- {
     command -v rehash >/dev/null && rehash
 }
 
-function scra() {
-    screen -xUS "$(screen -ls | tail -n +2 | head -1 | awk '{print $1}' | grep ".$1")"
-}
-
-function scrl() {
-    screen -ls
-}
-
-function scrn() {
-    screen -h 10000 -US "$1"
-}
-
-function scrk() {
-    screen -XS "$(screen -ls | tail -n +2 | head -1 | awk '{print $1}' | grep ".$1")" quit
+function scr- {
+    if [[ $# -gt 1 ]]; then
+        SESSION_ALIAS="$1"
+        shift
+        SESSION=$(screen -ls | tail -n +2 | head -1 | awk '{print $1}' | grep ".$SESSION_NAME")
+        echo "SESSION: $SESSION ACTION:" "$@"
+        screen -h 20000 -US "$SESSION" "$@"
+        unset SESSION_NAME SESSION
+    elif [[ $# == 1 ]]; then
+        if [[ $1 == -ls  ]]; then
+            screen -ls
+        else
+            screen -h 20000 -US "$1"
+        fi
+    else
+        screen
+    fi
 }
 
 if [ -n "$BASH" ];then
