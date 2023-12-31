@@ -78,12 +78,12 @@ function envupdate- {
 
 function scr- {
     if [[ $# -gt 1 ]]; then
-        SESSION_ALIAS="$1"
+        SCR_SESSION_ALIAS_="$1"
         shift
-        SESSION=$(screen -ls | tail -n +2 | head -1 | awk '{print $1}' | grep ".$SESSION_NAME")
-        echo "SESSION: $SESSION ACTION:" "$@"
-        screen -h 20000 -US "$SESSION" "$@"
-        unset SESSION_NAME SESSION
+        SCR_SESSION_=$(screen -ls | tail -n +2 | head -1 | awk '{print $1}' | grep ".$SCR_SESSION_ALIAS_")
+        echo "SESSION: $SCR_SESSION_ ACTION:" "$@"
+        screen -h 20000 -US "$SCR_SESSION_" "$@"
+        unset SCR_SESSION_ALIAS_ SCR_SESSION_
     elif [[ $# == 1 ]]; then
         if [[ $1 == -ls  ]]; then
             screen -ls
