@@ -82,13 +82,13 @@ function scr- {
         shift
         SCR_SESSION_=$(screen -ls | tail -n +2 | head -1 | awk '{print $1}' | grep ".$SCR_SESSION_ALIAS_")
         echo "SESSION: $SCR_SESSION_ ACTION:" "$@"
-        screen -h 20000 -US "$SCR_SESSION_" "$@"
+        screen -US "$SCR_SESSION_" "$@"
         unset SCR_SESSION_ALIAS_ SCR_SESSION_
     elif [[ $# == 1 ]]; then
         if [[ $1 == -ls  ]]; then
             screen -ls
         else
-            screen -h 20000 -US "$1"
+            screen -US "$1"
         fi
     else
         screen
