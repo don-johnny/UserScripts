@@ -85,13 +85,9 @@ function scr- {
         screen -US "$SCR_SESSION_" "$@"
         unset SCR_SESSION_ALIAS_ SCR_SESSION_
     elif [[ $# == 1 ]]; then
-        if [[ $1 == -ls  ]]; then
-            screen -ls
-        else
-            screen -US "$1"
-        fi
+        screen -US "$1"
     else
-        screen
+        screen -ls
     fi
 }
 
