@@ -91,6 +91,27 @@ function scr- {
     fi
 }
 
+function zswap- {
+    local SWITCH="$1"
+    local SWAP_SIZE="$2"
+    [[ -z "$SWAP_SIZE" ]] && SWAP_SIZE="2G"
+    [[ -z "$SWITCH" ]] && SWITCH="on"
+    if [[ "$SWITCH" == "off" ]]; then
+        swapoff /swapfile
+        rm -f /swapfile
+    elif [[ "$SWITCH" == "on" ]]; then
+        if [[ ! -f /swapfile ]]; then
+            fallocate -l "$SWAP_SIZE" /swapfile
+            chmod 600 /swapfile
+            mkswap /swapfile
+        fi
+        echo 1 > /sys/module/zswap/parameters/enabled
+        echo 25 > /sys/module/zswap/parameters/max_pool_percent
+        echo z3fold > /sys/module/zswap/parameters/zpool
+        swapon /swapfile
+    fi
+}
+
 if [ -n "$BASH" ];then
   if [ -f /etc/bashrc ]; then
       . /etc/bashrc
