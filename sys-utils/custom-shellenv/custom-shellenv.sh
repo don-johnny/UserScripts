@@ -15,7 +15,7 @@ else
 fi
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    curl -sSfL "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh" | bash -s
+    curl -sSfL "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh" | bash -s -
 fi
 
 curl -sSfLo "$HOME/.profile" "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/sys-utils/custom-shellenv/custom-shellprofile"
