@@ -1,92 +1,70 @@
 #!/usr/bin/env bash
 
+try-add-path-() {
+    local PATH_2_ADD=$1
+    local PATH_DEST=$PATH
+    (cd "$PATH_2_ADD" &>/dev/null) && {
+        case ":$PATH_DEST:" in
+        *":$PATH_2_ADD:"*) ;;
+        *)
+            PATH_DEST="$PATH_2_ADD:$PATH_DEST"
+            ;;
+        esac
+    }
+    echo "$PATH_DEST"
+}
+
 # nvm
 NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" && export NVM_DIR
 [ -d "$NVM_DIR/versions/node" ] && {
     NVM_LATEST_V=$(find "$NVM_DIR/versions/node" -mindepth 1 -maxdepth 1 -type d | sed 's:.*/::g' | sort -rV | head -n 1)
 }
 [ -n "$NVM_LATEST_V" ] && {
-    [ -d "$NVM_DIR/versions/node/$NVM_LATEST_V/bin" ] &&
-        {
-            case ":$PATH:" in
-
-            *":$NVM_DIR/versions/node/$NVM_LATEST_V/bin:"*) ;;
-
-            *)
-                {
-                    PATH2INS_TMP="$NVM_DIR/versions/node/$NVM_LATEST_V/bin"
-                    case ":$PATH:" in
-                    *":$PATH2INS_TMP:"*) ;;
-                    *)
-                        export PATH="$PATH2INS_TMP:$PATH"
-                        ;;
-                    esac
-                    export PATH="$PATH2INS_TMP:$PATH"
-                    unset PATH2INS_TMP
-                }
-                ;;
-            esac
-        }
+    PATH=$(try-add-path- "$NVM_DIR/versions/node/$NVM_LATEST_V/bin") && export PATH
 }
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" --no-use
 unset NVM_LATEST_V
 
 # rbenv
-command -v rbenv >/dev/null && eval "$(rbenv init -)"
+command -v rbenv >/dev/null && {
+    if [[ -n "$ZSH_NAME" ]]; then
+        eval "$(rbenv init - zsh)"
+    elif [[ -n "$BASH" ]]; then
+        eval "$(rbenv init - bash)"
+    else
+        eval "$(rbenv init -)"
+    fi
+}
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-PATH2INS_TMP="$PYENV_ROOT/bin"
-case ":$PATH:" in
-*":$PATH2INS_TMP:"*) ;;
-*)
-    export PATH="$PATH2INS_TMP:$PATH"
-    ;;
-esac
-unset PATH2INS_TMP
+PATH=$(try-add-path- "$PYENV_ROOT/bin") && export PATH
 command -v pyenv >/dev/null && eval "$(pyenv init -)"
 
-export PIPENV_VENV_IN_PROJECT=1
-export POETRY_VIRTUALENVS_IN_PROJECT=1
+# pixi
+PATH=$(try-add-path- "$HOME/.pixi/bin") && export PATH
 
-PATH2INS_TMP="$HOME/.cargo/bin"
-case ":$PATH:" in
-*":$PATH2INS_TMP:"*) ;;
-*)
-    export PATH="$PATH2INS_TMP:$PATH"
-    ;;
-esac
-unset PATH2INS_TMP
+# cargo
+PATH=$(try-add-path- "$HOME/.cargo/bin") && export PATH
 
-PATH2INS_TMP="$HOME/.local/bin"
-case ":$PATH:" in
-*":$PATH2INS_TMP:"*) ;;
-*)
-    export PATH="$PATH2INS_TMP:$PATH"
-    ;;
-esac
-unset PATH2INS_TMP
+# $HOME/.local/bin
+PATH=$(try-add-path- "$HOME/.local/bin") && export PATH
 
-PATH2INS_TMP="$HOME/go/bin"
-case ":$PATH:" in
-*":$PATH2INS_TMP:"*) ;;
-*)
-    export PATH="$PATH2INS_TMP:$PATH"
-    ;;
-esac
-unset PATH2INS_TMP
+# go
+PATH=$(try-add-path- "$HOME/go/bin") && export PATH
 
-PATH2INS_TMP="/usr/local/sbin"
-case ":$PATH:" in
-*":$PATH2INS_TMP:"*) ;;
-*)
-    export PATH="$PATH2INS_TMP:$PATH"
-    ;;
-esac
-unset PATH2INS_TMP
+# /usr/local/sbin
+PATH=$(try-add-path- "/usr/local/sbin") && export PATH
+
+# sdkman
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 export CLICOLOR=1
 export SYSTEMD_EDITOR="vim"
+export EDITOR="vim"
 export NODE_REPL_HISTORY=''
+export PIPENV_VENV_IN_PROJECT=1
+export POETRY_VIRTUALENVS_IN_PROJECT=1
 
 [ -r "$HOME/.custom-shellprofile" ] && source "$HOME/.custom-shellprofile"

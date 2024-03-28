@@ -11,7 +11,11 @@ source "$HOME/.profile"
 alias rt='tput reset'
 alias aria2c-='aria2c --no-conf --file-allocation=none -x 16 -c'
 
-function update-nvm- {
+install-nvm- (){
+    git clone https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
+}
+
+update-nvm- (){
     (
         cd "$NVM_DIR" || exit
         git fetch --tags origin
@@ -19,11 +23,11 @@ function update-nvm- {
     )
 }
 
-function update-env-scripts- {
+update-env-scripts- (){
     curl -sSfL "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/sys-utils/custom-shellenv/custom-shellenv.sh" | bash -s -
 }
 
-function pyenvr- {
+pyenvr- (){
     (
         eval "$(pyenv init -)"
         IS_FIRST_ARG_V=1
@@ -36,7 +40,7 @@ function pyenvr- {
     )
 }
 
-function rdnstr- {
+rdnstr- (){
     if [ -z "$1" ]; then
         LC_ALL=C tr -dc '[:alnum:]' < /dev/urandom
     else
@@ -44,7 +48,7 @@ function rdnstr- {
     fi
 }
 
-function hash-pwd- {
+hash-pwd- (){
     (
         if (( $# < 2 )); then
             echo "usage: hash_pwd_ OPENSSL_PASSWD_PARAMS PASSWD"
@@ -66,7 +70,7 @@ function hash-pwd- {
     )
 }
 
-function envupdate- {
+envupdate- (){
     [ "$USER" = "root" ] && command -v env-update >/dev/null && env-update
     source /etc/profile
     # [[ "$OSTYPE" != "darwin"* ]] && echo macos
@@ -76,7 +80,7 @@ function envupdate- {
     command -v hash >/dev/null && hash -r
 }
 
-function scr- {
+scr- (){
     if [[ $# -gt 1 ]]; then
         SCR_SESSION_ALIAS_="$1"
         shift
@@ -91,7 +95,7 @@ function scr- {
     fi
 }
 
-function zswap- {
+zswap- (){
     local SWITCH="$1"
     local SWAP_SIZE="$2"
     [[ -z "$SWAP_SIZE" ]] && SWAP_SIZE="2G"
@@ -110,6 +114,26 @@ function zswap- {
         echo z3fold > /sys/module/zswap/parameters/zpool
         swapon /swapfile
     fi
+}
+
+install-pixi- (){
+    curl -fsSL https://pixi.sh/install.sh | bash -s -
+}
+
+nvimo (){
+    DIR_2_OPEN="$1"
+    shift
+    [ -z "$DIR_2_OPEN" ] && DIR_2_OPEN="."
+    (
+        cd "$DIR_2_OPEN" && unset DIR_2_OPEN && exec nvim .
+    )
+}
+
+git-reset- (){
+  [[ -d ".git" ]] && {
+    find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rfv {} \;
+    git reset --hard
+  }
 }
 
 if [ -n "$BASH" ];then
