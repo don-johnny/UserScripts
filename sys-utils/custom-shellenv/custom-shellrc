@@ -145,7 +145,7 @@ git-reset-() {
 
 try-pixi-env-() {
     command -v pixi &>/dev/null && {
-        (cd "./.pixi" &>/dev/null) && {
+        (cd "./.pixi/envs" &>/dev/null) && {
             pixi shell-hook
             eval "$(pixi shell-hook)"
         }
