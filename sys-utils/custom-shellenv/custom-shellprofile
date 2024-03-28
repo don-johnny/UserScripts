@@ -45,7 +45,7 @@ command -v rbenv >/dev/null && {
 [[ -z $PYENV_ROOT ]] && {
     export PYENV_ROOT="$HOME/.pyenv"
     PATH=$(try-add-path- "$PYENV_ROOT/bin") && export PATH
-    eval "$(pyenv init -)"
+    command -v pyenv &>/dev/null && eval "$(pyenv init -)"
 }
 
 # pixi
