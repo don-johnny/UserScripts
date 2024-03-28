@@ -1,12 +1,33 @@
 #!/usr/bin/env bash
 
-# shellcheck disable=SC1091
-if [ -z "$TK_PROFILE_LOADED" ]; then
-
 # nvm
 NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" && export NVM_DIR
-[ -d "$NVM_DIR/versions/node" ] && NVM_LATEST_V=$(find "$NVM_DIR/versions/node" -mindepth 1 -maxdepth 1 -type d | sed 's:.*/::g' | sort -rV | head -n 1)
-[ -n "$NVM_LATEST_V" ] && [ -d "$NVM_DIR/versions/node/$NVM_LATEST_V/bin" ] && case ":$PATH:" in *":$NVM_DIR/versions/node/$NVM_LATEST_V/bin:"*) ;; *) export PATH="$NVM_DIR/versions/node/$NVM_LATEST_V/bin:$PATH" ;; esac;
+[ -d "$NVM_DIR/versions/node" ] && {
+    NVM_LATEST_V=$(find "$NVM_DIR/versions/node" -mindepth 1 -maxdepth 1 -type d | sed 's:.*/::g' | sort -rV | head -n 1)
+}
+[ -n "$NVM_LATEST_V" ] && {
+    [ -d "$NVM_DIR/versions/node/$NVM_LATEST_V/bin" ] &&
+        {
+            case ":$PATH:" in
+
+            *":$NVM_DIR/versions/node/$NVM_LATEST_V/bin:"*) ;;
+
+            *)
+                {
+                    PATH2INS_TMP="$NVM_DIR/versions/node/$NVM_LATEST_V/bin"
+                    case ":$PATH:" in
+                    *":$PATH2INS_TMP:"*) ;;
+                    *)
+                        export PATH="$PATH2INS_TMP:$PATH"
+                        ;;
+                    esac
+                    export PATH="$PATH2INS_TMP:$PATH"
+                    unset PATH2INS_TMP
+                }
+                ;;
+            esac
+        }
+}
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" --no-use
 unset NVM_LATEST_V
 
@@ -15,25 +36,57 @@ command -v rbenv >/dev/null && eval "$(rbenv init -)"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-PATH2INS_TMP="$PYENV_ROOT/bin" ; case ":$PATH:" in *":$PATH2INS_TMP:"*) ;; *) export PATH="$PATH2INS_TMP:$PATH" ;; esac; unset PATH2INS_TMP
+PATH2INS_TMP="$PYENV_ROOT/bin"
+case ":$PATH:" in
+*":$PATH2INS_TMP:"*) ;;
+*)
+    export PATH="$PATH2INS_TMP:$PATH"
+    ;;
+esac
+unset PATH2INS_TMP
 command -v pyenv >/dev/null && eval "$(pyenv init -)"
 
 export PIPENV_VENV_IN_PROJECT=1
 export POETRY_VIRTUALENVS_IN_PROJECT=1
 
-PATH2INS_TMP="$HOME/.cargo/bin" ; case ":$PATH:" in *":$PATH2INS_TMP:"*) ;; *) export PATH="$PATH2INS_TMP:$PATH" ;; esac; unset PATH2INS_TMP
-PATH2INS_TMP="$HOME/.local/bin" ; case ":$PATH:" in *":$PATH2INS_TMP:"*) ;; *) export PATH="$PATH2INS_TMP:$PATH" ;; esac; unset PATH2INS_TMP
-PATH2INS_TMP="$HOME/go/bin" ; case ":$PATH:" in *":$PATH2INS_TMP:"*) ;; *) export PATH="$PATH2INS_TMP:$PATH" ;; esac; unset PATH2INS_TMP
-PATH2INS_TMP="/usr/local/sbin" ; case ":$PATH:" in *":$PATH2INS_TMP:"*) ;; *) export PATH="$PATH2INS_TMP:$PATH" ;; esac; unset PATH2INS_TMP
+PATH2INS_TMP="$HOME/.cargo/bin"
+case ":$PATH:" in
+*":$PATH2INS_TMP:"*) ;;
+*)
+    export PATH="$PATH2INS_TMP:$PATH"
+    ;;
+esac
+unset PATH2INS_TMP
 
-[ -r "$HOME/.custom-shellprofile" ]  && source "$HOME/.custom-shellprofile"
+PATH2INS_TMP="$HOME/.local/bin"
+case ":$PATH:" in
+*":$PATH2INS_TMP:"*) ;;
+*)
+    export PATH="$PATH2INS_TMP:$PATH"
+    ;;
+esac
+unset PATH2INS_TMP
+
+PATH2INS_TMP="$HOME/go/bin"
+case ":$PATH:" in
+*":$PATH2INS_TMP:"*) ;;
+*)
+    export PATH="$PATH2INS_TMP:$PATH"
+    ;;
+esac
+unset PATH2INS_TMP
+
+PATH2INS_TMP="/usr/local/sbin"
+case ":$PATH:" in
+*":$PATH2INS_TMP:"*) ;;
+*)
+    export PATH="$PATH2INS_TMP:$PATH"
+    ;;
+esac
+unset PATH2INS_TMP
 
 export CLICOLOR=1
 export SYSTEMD_EDITOR="vim"
-
 export NODE_REPL_HISTORY=''
 
-# Flag shell profile is loaded.
-export TK_PROFILE_LOADED=1
-
-fi
+[ -r "$HOME/.custom-shellprofile" ] && source "$HOME/.custom-shellprofile"
