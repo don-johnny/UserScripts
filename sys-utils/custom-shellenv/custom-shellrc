@@ -11,11 +11,11 @@ source "$HOME/.profile"
 alias rt='tput reset'
 alias aria2c-='aria2c --no-conf --file-allocation=none -x 16 -c'
 
-install-nvm- (){
+install-nvm-() {
     git clone https://github.com/nvm-sh/nvm.git "$HOME/.nvm"
 }
 
-update-nvm- (){
+update-nvm-() {
     (
         cd "$NVM_DIR" || exit
         git fetch --tags origin
@@ -23,11 +23,11 @@ update-nvm- (){
     )
 }
 
-update-env-scripts- (){
+update-env-scripts-() {
     curl -sSfL "https://raw.githubusercontent.com/tinkernels/userscripts/gh-pages/sys-utils/custom-shellenv/custom-shellenv.sh" | bash -s -
 }
 
-pyenvr- (){
+pyenvr-() {
     (
         eval "$(pyenv init -)"
         IS_FIRST_ARG_V=1
@@ -40,37 +40,44 @@ pyenvr- (){
     )
 }
 
-rdnstr- (){
+rdnstr-() {
     if [ -z "$1" ]; then
-        LC_ALL=C tr -dc '[:alnum:]' < /dev/urandom
+        LC_ALL=C tr -dc '[:alnum:]' </dev/urandom
     else
-        LC_ALL=C tr -dc '[:alnum:]' < /dev/urandom | fold -w "$1" | head -n 1
+        LC_ALL=C tr -dc '[:alnum:]' </dev/urandom | fold -w "$1" | head -n 1
     fi
 }
 
-hash-pwd- (){
+hash-pwd-() {
     (
-        if (( $# < 2 )); then
+        if (($# < 2)); then
             echo "usage: hash_pwd_ OPENSSL_PASSWD_PARAMS PASSWD"
             echo
             echo "openssl passwd help:"
             echo
-            openssl passwd -help 2>&1 | sed  -E 's/^(.*)$/    \1/g'
+            openssl passwd -help 2>&1 | sed -E 's/^(.*)$/    \1/g'
         else
-            ARGS_=( "$@" )
-            ARGS_4OPENSSL_=(); i=1
+            ARGS_=("$@")
+            ARGS_4OPENSSL_=()
+            i=1
             ARG_PWD_=""
             # copy args to new array except last arg
-            for v in "${ARGS_[@]}"; do if ((i + 1 > ${#ARGS_[@]})); then ARG_PWD_="$v"; break; else ARGS_4OPENSSL_+=("$v"); i=$((i+1)); fi; done
-            if [ -n "$ARG_PWD_" ];then
+            for v in "${ARGS_[@]}"; do if ((i + 1 > ${#ARGS_[@]})); then
+                ARG_PWD_="$v"
+                break
+            else
+                ARGS_4OPENSSL_+=("$v")
+                i=$((i + 1))
+            fi; done
+            if [ -n "$ARG_PWD_" ]; then
                 echo "$ARG_PWD_" | openssl passwd "${ARGS_4OPENSSL_[@]}" -stdin
             fi
-            
+
         fi
     )
 }
 
-envupdate- (){
+envupdate-() {
     [ "$USER" = "root" ] && command -v env-update >/dev/null && env-update
     source /etc/profile
     # [[ "$OSTYPE" != "darwin"* ]] && echo macos
@@ -80,7 +87,7 @@ envupdate- (){
     command -v hash >/dev/null && hash -r
 }
 
-scr- (){
+scr-() {
     if [[ $# -gt 1 ]]; then
         SCR_SESSION_ALIAS_="$1"
         shift
@@ -95,7 +102,7 @@ scr- (){
     fi
 }
 
-zswap- (){
+zswap-() {
     local SWITCH="$1"
     local SWAP_SIZE="$2"
     [[ -z "$SWAP_SIZE" ]] && SWAP_SIZE="2G"
@@ -109,18 +116,18 @@ zswap- (){
             chmod 600 /swapfile
             mkswap /swapfile
         fi
-        echo 1 > /sys/module/zswap/parameters/enabled
-        echo 25 > /sys/module/zswap/parameters/max_pool_percent
-        echo z3fold > /sys/module/zswap/parameters/zpool
+        echo 1 >/sys/module/zswap/parameters/enabled
+        echo 25 >/sys/module/zswap/parameters/max_pool_percent
+        echo z3fold >/sys/module/zswap/parameters/zpool
         swapon /swapfile
     fi
 }
 
-install-pixi- (){
+install-pixi-() {
     curl -fsSL https://pixi.sh/install.sh | bash -s -
 }
 
-nvimo (){
+nvimo() {
     DIR_2_OPEN="$1"
     shift
     [ -z "$DIR_2_OPEN" ] && DIR_2_OPEN="."
@@ -129,17 +136,27 @@ nvimo (){
     )
 }
 
-git-reset- (){
-  [[ -d ".git" ]] && {
-    find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rfv {} \;
-    git reset --hard
-  }
+git-reset-() {
+    [[ -d ".git" ]] && {
+        find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rfv {} \;
+        git reset --hard
+    }
 }
 
-if [ -n "$BASH" ];then
-  if [ -f /etc/bashrc ]; then
-      . /etc/bashrc
-  fi
+try-pixi-env-() {
+    command -v pixi &>/dev/null && {
+        (cd "./.pixi" &>/dev/null) && {
+            pixi shell-hook
+            eval "$(pixi shell-hook)"
+        }
+    }
+}
+try-pixi-env-
+
+if [ -n "$BASH" ]; then
+    if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+    fi
 fi
 
-[ -r "$HOME/.custom-shellrc" ]  && source "$HOME/.custom-shellrc"
+[ -r "$HOME/.custom-shellrc" ] && source "$HOME/.custom-shellrc"
