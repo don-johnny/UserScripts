@@ -11,7 +11,7 @@ if [ ! -r "$HOME/.screenrc" ];then
 else
     grep -Eq '^[[:blank:]]*escape[[:blank:]]+\^Bb' "$HOME/.screenrc" || echo "escape ^Bb" >> "$HOME/.screenrc"
     grep -Eq '^[[:blank:]]*termcapinfo[[:blank:]]+xterm\*[[:blank:]]+ti@:te@' "$HOME/.screenrc" || echo "termcapinfo xterm* ti@:te@" >> "$HOME/.screenrc"
-    grep -Eq '^[[:blank:]]*defscrollback[[:blank:]]+\d+' "$HOME/.screenrc" || echo "defscrollback 100000" >> "$HOME/.screenrc"
+    grep -Eq '^[[:blank:]]*defscrollback[[:blank:]]+[[:digit:]]+' "$HOME/.screenrc" || echo "defscrollback 100000" >> "$HOME/.screenrc"
 fi
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
