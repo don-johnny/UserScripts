@@ -153,7 +153,7 @@ try-pixi-env-() {
 try-pixi-env-
 
 pixi-init-() {
-    pixi init --platform osx-64 --platform linux-64 --platform linux-aarch64 --platform osx-64 --platform osx-arm64 --platform win-64 "$@"
+    pixi init --platform linux-64 --platform linux-aarch64 --platform osx-64 --platform osx-arm64 --platform win-64 "$@"
 }
 
 if [ -n "$BASH" ]; then
