@@ -69,6 +69,4 @@ export NODE_REPL_HISTORY=''
 export PIPENV_VENV_IN_PROJECT=1
 export POETRY_VIRTUALENVS_IN_PROJECT=1
 
-unset append-path-
-
 [ -r "$HOME/.custom-shellprofile" ] && source "$HOME/.custom-shellprofile"
