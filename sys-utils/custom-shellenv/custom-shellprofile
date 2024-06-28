@@ -1,17 +1,12 @@
 #!/usr/bin/env bash
 
-try-add-path-() {
-    local PATH_2_ADD=$1
-    local PATH_DEST=$PATH
-    (cd "$PATH_2_ADD" &>/dev/null) && {
-        case ":$PATH_DEST:" in
-        *":$PATH_2_ADD:"*) ;;
-        *)
-            PATH_DEST="$PATH_2_ADD:$PATH_DEST"
-            ;;
-        esac
-    }
-    echo "$PATH_DEST"
+append-path- () {
+  case ":$PATH:" in
+    *:"$1":*) ;;
+    *)
+      PATH="$1${PATH:+:$PATH}"
+      ;;
+    esac
 }
 
 # nvm
@@ -20,7 +15,7 @@ NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s
     NVM_LATEST_V=$(find "$NVM_DIR/versions/node" -mindepth 1 -maxdepth 1 -type d | sed 's:.*/::g' | sort -rV | head -n 1)
 }
 [ -n "$NVM_LATEST_V" ] && {
-    PATH=$(try-add-path- "$NVM_DIR/versions/node/$NVM_LATEST_V/bin") && export PATH
+    append-path- "$NVM_DIR/versions/node/$NVM_LATEST_V/bin" && export PATH
 }
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" --no-use
 unset NVM_LATEST_V
@@ -42,31 +37,29 @@ command -v rbenv >/dev/null && {
 }
 
 # pyenv
-[[ -z $PYENV_ROOT ]] && {
-    export PYENV_ROOT="$HOME/.pyenv"
-    PATH=$(try-add-path- "$PYENV_ROOT/bin") && export PATH
-    command -v pyenv &>/dev/null && eval "$(pyenv init -)"
-}
+export PYENV_ROOT="$HOME/.pyenv"
+append-path- "$PYENV_ROOT/bin" && export PATH
+command -v pyenv &>/dev/null && eval "$(pyenv init -)"
 
 # pixi
-PATH=$(try-add-path- "$HOME/.pixi/bin") && export PATH
+append-path- "$HOME/.pixi/bin" && export PATH
 
 # cargo
-PATH=$(try-add-path- "$HOME/.cargo/bin") && export PATH
+append-path- "$HOME/.cargo/bin" && export PATH
 
 # $HOME/.local/bin
-PATH=$(try-add-path- "$HOME/.local/bin") && export PATH
+append-path- "$HOME/.local/bin" && export PATH
 
 # go
-PATH=$(try-add-path- "$HOME/go/bin") && export PATH
+append-path- "$HOME/go/bin" && export PATH
 
 # /usr/local/sbin
-PATH=$(try-add-path- "/usr/local/sbin") && export PATH
+append-path- "/usr/local/sbin" && export PATH
 
 # sdkman
-[[ -z $SDKMAN_DIR ]] && {
-    export SDKMAN_DIR="$HOME/.sdkman"
-    [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+command -v sdk &>/dev/null || {
+  [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 }
 
 export CLICOLOR=1
@@ -75,5 +68,7 @@ export EDITOR="vim"
 export NODE_REPL_HISTORY=''
 export PIPENV_VENV_IN_PROJECT=1
 export POETRY_VIRTUALENVS_IN_PROJECT=1
+
+unset append-path-
 
 [ -r "$HOME/.custom-shellprofile" ] && source "$HOME/.custom-shellprofile"
