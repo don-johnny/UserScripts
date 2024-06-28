@@ -5,6 +5,7 @@ append-path- () {
     *:"$1":*) ;;
     *)
       PATH="$1${PATH:+:$PATH}"
+      export PATH
       ;;
     esac
 }
