@@ -16,7 +16,7 @@ NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s
     NVM_LATEST_V=$(find "$NVM_DIR/versions/node" -mindepth 1 -maxdepth 1 -type d | sed 's:.*/::g' | sort -rV | head -n 1)
 }
 [ -n "$NVM_LATEST_V" ] && {
-    append-path- "$NVM_DIR/versions/node/$NVM_LATEST_V/bin" && export PATH
+    append-path- "$NVM_DIR/versions/node/$NVM_LATEST_V/bin"
 }
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" --no-use
 unset NVM_LATEST_V
@@ -39,23 +39,23 @@ command -v rbenv >/dev/null && {
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-append-path- "$PYENV_ROOT/bin" && export PATH
+append-path- "$PYENV_ROOT/bin"
 command -v pyenv &>/dev/null && eval "$(pyenv init -)"
 
 # pixi
-append-path- "$HOME/.pixi/bin" && export PATH
+append-path- "$HOME/.pixi/bin"
 
 # cargo
-append-path- "$HOME/.cargo/bin" && export PATH
+append-path- "$HOME/.cargo/bin"
 
 # $HOME/.local/bin
-append-path- "$HOME/.local/bin" && export PATH
+append-path- "$HOME/.local/bin"
 
 # go
-append-path- "$HOME/go/bin" && export PATH
+append-path- "$HOME/go/bin"
 
 # /usr/local/sbin
-append-path- "/usr/local/sbin" && export PATH
+append-path- "/usr/local/sbin"
 
 # sdkman
 export SDKMAN_DIR="$HOME/.sdkman"
